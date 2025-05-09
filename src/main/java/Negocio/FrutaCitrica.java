@@ -29,16 +29,16 @@ public class FrutaCitrica extends Fruta {
     //Metodos propios
     @Override
     public double calcCaloriasTotal() {
-        return super.calcCaloriasTotal() - (7 - ph) * caloriasPorGramo;
+        return super.calcCaloriasTotal() - (7 - ph) * getCaloriasPorGramo();
     }
 
 
     @Override
     public String toString() {
-        return "---- Fruta: " + nombre + " ----" +
+        return "---- Fruta: " + getNombre() + " ----" +
                 "Tipo: Citrica" +
-                "\npeso: " + peso +
-                "\nCalorias por gramo: " + caloriasPorGramo +
+                "\npeso: " + getPeso() +
+                "\nCalorias por gramo: " + getCaloriasPorGramo() +
                 "\nPh: " + ph;
     }
 }

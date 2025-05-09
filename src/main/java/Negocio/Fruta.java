@@ -3,9 +3,9 @@ package Negocio;
 public class Fruta {
 
     // Atributos
-    protected String nombre;
-    protected double peso; // en gramos
-    protected double caloriasPorGramo;
+    private String nombre;
+    private double peso; // en gramos
+    private double caloriasPorGramo;
 
     // Constructores
 
