@@ -27,6 +27,7 @@ public class FrutaCitrica extends Fruta {
     }
 
     //Metodos propios
+
     @Override
     public double calcCaloriasTotal() {
         return super.calcCaloriasTotal() - (7 - ph) * getCaloriasPorGramo();
