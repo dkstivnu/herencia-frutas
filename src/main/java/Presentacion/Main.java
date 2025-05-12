@@ -1,13 +1,22 @@
 package Presentacion;
 
 import java.util.Scanner;
+
 import Negocio.Fruta;
 import Negocio.FrutaCitrica;
 
 public class Main {
     public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
+        int opcion;
+
     }
-    int opcion;
+
+    public void imprimirmenu() {
+
+    }
+
 
 }
+
+
