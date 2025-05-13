@@ -10,10 +10,10 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int opcion;
-        Fruta fruta= new Fruta();
-        Fruta frutaCitrica= new FrutaCitrica();
+        Fruta fruta = new Fruta();
+        Fruta frutaCitrica = new FrutaCitrica();
 
-        do{
+        do {
             System.out.println("Seleccione una opcion");
             System.out.println("1.Seleccionar el tipo de fruta e ingresar sus datos. ");
             System.out.println("2. Calcular el total de calorías aportadas");
@@ -21,7 +21,7 @@ public class Main {
             System.out.print("4.Mostrar la información de las frutas ");
             System.out.print("Salir");
 
-            opcion=sc.nextInt();
+            opcion = sc.nextInt();
             switch (opcion) {
                 case 1: {
                     System.out.println("¿Qué tipo de fruta es?");
