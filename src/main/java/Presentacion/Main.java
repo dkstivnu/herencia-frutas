@@ -4,47 +4,50 @@ import java.util.Scanner;
 
 import Negocio.Fruta;
 import Negocio.FrutaCitrica;
+import Negocio.Recursos;
 
 public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+
+        Recursos r = new Recursos();
+        r.cargarFrutas();
+
         int opcion;
         Fruta fruta = new Fruta();
-        Fruta frutaCitrica = new FrutaCitrica();
+        FrutaCitrica frutaCitrica = new FrutaCitrica();
 
         do {
-            System.out.println("Seleccione una opcion");
-            System.out.println("1.Seleccionar el tipo de fruta e ingresar sus datos. ");
-            System.out.println("2. Calcular el total de calorías aportadas");
-            System.out.println("3. Modificar los datos de las frutas");
-            System.out.print("4.Mostrar la información de las frutas ");
-            System.out.print("Salir");
+            imprimirMenu();
 
             opcion = sc.nextInt();
+
             switch (opcion) {
                 case 1: {
                     System.out.println("¿Qué tipo de fruta es?");
                     System.out.println("1. Cítrica");
                     System.out.println("2. Normal");
+
                     int tipo = sc.nextInt();
-                    sc.nextLine();
 
                     System.out.print("Ingrese el nombre: ");
                     String nombre = sc.nextLine();
                     System.out.print("Ingrese el peso: ");
                     double peso = sc.nextDouble();
                     System.out.print("Ingrese las caloríasxgramo: ");
-                    double caloriasxgramo = sc.nextDouble();
+                    double calPorGramo = sc.nextDouble();
 
-                    if (tipo == 1) {
+
+                    if (tipo == 1) { // Si es una fruta citrica.
                         System.out.print("Ingrese el ph: ");
                         double ph = sc.nextDouble();
-                        frutaCitrica = new FrutaCitrica(nombre, peso, caloriasxgramo, ph);
-                        fruta = null;
-                    } else if (tipo == 2) {
-                        fruta = new Fruta(nombre, peso, caloriasxgramo);
-                        frutaCitrica = null;
+                        frutaCitrica = new FrutaCitrica(nombre, peso, calPorGramo, ph);
+                        r.agregarFrutaCitrica(frutaCitrica);
+
+                    } else if (tipo == 2) { // Si es una fruta normal o ordinaria.
+                        fruta = new Fruta(nombre, peso, calPorGramo);
+                        r.agregarFruta(fruta);
                     } else {
                         System.out.println("Tipo de fruta no válido.");
                     }
@@ -82,7 +85,7 @@ public class Main {
                         frutaCitrica.setCaloriasPorGramo(sc.nextDouble());
                         System.out.print("Nuevo pH: ");
                         double nuevoPh = sc.nextDouble();
-                        frutaCitrica.setPh("nuevoph");//no se porque el set no funciona...
+                        frutaCitrica.setPh(sc.nextDouble());//no se porque el set no funciona...
                         sc.nextLine();
                     } else {
                         System.out.println("No hay fruta para modificar.");
@@ -112,6 +115,15 @@ public class Main {
         } while (opcion != 5);
 
         sc.close();
+    }
+
+    private static void imprimirMenu() {
+        System.out.println("Seleccione una opcion");
+        System.out.println("1.Seleccionar el tipo de fruta e ingresar sus datos. ");
+        System.out.println("2. Calcular el total de calorías aportadas");
+        System.out.println("3. Modificar los datos de las frutas");
+        System.out.print("4. Mostrar la información de las frutas ");
+        System.out.print("5. Salir");
     }
 }
 
