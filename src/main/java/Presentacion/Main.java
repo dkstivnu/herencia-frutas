@@ -76,33 +76,28 @@ public class Main {
                 }
                 case 2: {
                     System.out.println("Se ha seleccionado la ultima fruta o fruta citrica que ingresaste");
-                    System.out.println("1. Continuar\n 0. Salir");
 
-                    if (getAnInt(sc) == 1) {
-                        Fruta ultimaFruta;
-                        switch (indiceReciente[0]) {
-                            case 1: {
-                                ultimaFruta = r.getFrutas().get(indiceReciente[1]);
-                                System.out.println("Las calorias totales de la fruta " + ultimaFruta.getNombre() +
-                                        " Son " + ultimaFruta.calcCaloriasTotal() + " cal");
-                            }
-                            break;
-                            case 2: {
-                                ultimaFruta = r.getFrutasCitric().get(indiceReciente[1]);
-                                System.out.println("Las calorias totales de la fruta " + ultimaFruta.getNombre() +
-                                        " Son " + ultimaFruta.calcCaloriasTotal() + " cal");
-                            }
-                            break;
-                            default: {
-                                System.out.println("ERROR - NO SE PUDO RECUPERAR LA ULTIMA FRUTA");
-                            }
-                            break;
+                    Fruta ultimaFruta;
+                    switch (indiceReciente[0]) {
+                        case 1: {
+                            ultimaFruta = r.getFrutas().get(indiceReciente[1]);
+                            System.out.println("Las calorias totales de la fruta " + ultimaFruta.getNombre() +
+                                    " Son " + ultimaFruta.calcCaloriasTotal() + " cal");
                         }
-
-                    } else {
-                        System.out.println("Saliendo...");
+                        break;
+                        case 2: {
+                            ultimaFruta = r.getFrutasCitric().get(indiceReciente[1]);
+                            System.out.println("Las calorias totales de la fruta " + ultimaFruta.getNombre() +
+                                    " Son " + ultimaFruta.calcCaloriasTotal() + " cal");
+                        }
+                        break;
+                        default: {
+                            System.out.println("ERROR - NO SE PUDO RECUPERAR LA ULTIMA FRUTA");
+                        }
+                        break;
                     }
-                    break;
+
+
                 }
                 case 3: {
                     System.out.println("Selecciona el tipo de fruta que quieres modificar: ");
@@ -113,8 +108,7 @@ public class Main {
                     int indice = getAnInt(sc);
 
 
-
-                    if (tipo == 1 && indice < r.getFrutas().size()) {
+                    if (tipo == 1 && indice < r.getFrutas().size() - 1) {
                         System.out.print("Nuevo nombre: ");
                         r.getFrutas().get(indice).setNombre(sc.next());
                         System.out.print("Nuevo peso: ");
@@ -122,7 +116,7 @@ public class Main {
                         System.out.print("Nuevas calorías por gramo: ");
                         r.getFrutas().get(indice).setCaloriasPorGramo(getADouble(sc));
 
-                    }else if (tipo == 2 && indice < r.getFrutasCitric().size()) {
+                    } else if (tipo == 2 && indice < r.getFrutasCitric().size() - 1) {
                         System.out.print("Nuevo nombre: ");
                         r.getFrutasCitric().get(indice).setNombre(sc.next());
                         System.out.print("Nuevo peso: ");
@@ -148,11 +142,13 @@ public class Main {
                     }
                     break;
                 }
-                case 5:{
+                case 5: {
                     System.out.println("Cerrando el programa...");
-                    break;}
-                default:{
-                    System.out.println("Opción no válida.");}
+                    break;
+                }
+                default: {
+                    System.out.println("Opción no válida.");
+                }
             }
 
         } while (opcion != 5);
@@ -163,29 +159,29 @@ public class Main {
     private static double getADouble(Scanner sc) {
         double numero;
         boolean valido;
-        do{
+        do {
             numero = sc.nextDouble();
-            if (numero <= 0.0){
+            if (numero <= 0.0) {
                 System.out.println(" El numero no puede ser negativo o igual a cero, ingresa nuevamente: ");
                 valido = false;
-            }else valido = true;
+            } else valido = true;
 
-        }while (!valido);
+        } while (!valido);
         return numero;
     }
 
     private static int getAnInt(Scanner sc) {
         int numero;
         boolean valido;
-         do{
-             numero = sc.nextInt();
-             if (numero <= 0){
-                 System.out.println(" El numero no puede ser negativo o igual a cero, ingresa nuevamente: ");
-                 valido = false;
-             }else valido = true;
+        do {
+            numero = sc.nextInt();
+            if (numero <= 0) {
+                System.out.println(" El numero no puede ser negativo o igual a cero, ingresa nuevamente: ");
+                valido = false;
+            } else valido = true;
 
-         }while (!valido);
-         return numero;
+        } while (!valido);
+        return numero;
     }
 
     private static void imprimirMenu() {
