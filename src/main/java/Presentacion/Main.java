@@ -23,8 +23,8 @@ public class Main {
         indiceReciente[1] = r.getFrutas().size() - 1;
 
         int opcion;
-        Fruta fruta = new Fruta();
-        FrutaCitrica frutaCitrica = new FrutaCitrica();
+        Fruta fruta;
+        FrutaCitrica frutaCitrica;
 
         do {
             imprimirMenu();
@@ -162,11 +162,11 @@ public class Main {
 
     private static double getADouble(Scanner sc) {
         double numero;
-        boolean valido = true;
+        boolean valido;
         do{
-            numero = sc.nextInt();
-            if (numero < 0){
-                System.out.println(" El numero no puede ser negativo o igual a cero");
+            numero = sc.nextDouble();
+            if (numero <= 0.0){
+                System.out.println(" El numero no puede ser negativo o igual a cero, ingresa nuevamente: ");
                 valido = false;
             }else valido = true;
 
@@ -176,11 +176,11 @@ public class Main {
 
     private static int getAnInt(Scanner sc) {
         int numero;
-        boolean valido = true;
+        boolean valido;
          do{
              numero = sc.nextInt();
-             if (numero < 0){
-                 System.out.println(" El numero no puede ser negativo o igual a cero");
+             if (numero <= 0){
+                 System.out.println(" El numero no puede ser negativo o igual a cero, ingresa nuevamente: ");
                  valido = false;
              }else valido = true;
 
