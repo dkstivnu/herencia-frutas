@@ -10,9 +10,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int opcion;
-        Fruta frutaNormal=null;
-        Fruta frutaCitrica=null;
-        sc.nextLine();
+        Fruta fruta= new Fruta();
+        Fruta frutaCitrica= new FrutaCitrica();
 
         do{
             System.out.println("Seleccione una opcion");
@@ -42,9 +41,9 @@ public class Main {
                         System.out.print("Ingrese el ph: ");
                         double ph = sc.nextDouble();
                         frutaCitrica = new FrutaCitrica(nombre, peso, caloriasxgramo, ph);
-                        frutaNormal = null;
+                        fruta = null;
                     } else if (tipo == 2) {
-                        frutaNormal = new Fruta(nombre, peso, caloriasxgramo);
+                        fruta = new Fruta(nombre, peso, caloriasxgramo);
                         frutaCitrica = null;
                     } else {
                         System.out.println("Tipo de fruta no válido.");
@@ -53,8 +52,8 @@ public class Main {
                 }
 
                 case 2: {
-                    if (frutaNormal != null) {
-                        double calorias = frutaNormal.calcCaloriasTotal();
+                    if (fruta != null) {
+                        double calorias = fruta.calcCaloriasTotal();
                         System.out.println("Calorías totales: " + calorias);
                     } else if (frutaCitrica != null) {
                         double calorias = frutaCitrica.calcCaloriasTotal();
@@ -66,13 +65,13 @@ public class Main {
                 }
 
                 case 3: {
-                    if (frutaNormal != null) {
+                    if (fruta != null) {
                         System.out.print("Nuevo nombre: ");
-                        frutaNormal.setNombre(sc.nextLine());
+                        fruta.setNombre(sc.nextLine());
                         System.out.print("Nuevo peso: ");
-                        frutaNormal.setPeso(sc.nextDouble());
+                        fruta.setPeso(sc.nextDouble());
                         System.out.print("Nuevas calorías por gramo: ");
-                        frutaNormal.setCaloriasPorGramo(sc.nextDouble());
+                        fruta.setCaloriasPorGramo(sc.nextDouble());
                         sc.nextLine();
                     } else if (frutaCitrica != null) {
                         System.out.print("Nuevo nombre: ");
@@ -92,8 +91,8 @@ public class Main {
                 }
 
                 case 4: {
-                    if (frutaNormal != null) {
-                        System.out.println(frutaNormal);
+                    if (fruta != null) {
+                        System.out.println(fruta);
                     } else if (frutaCitrica != null) {
                         System.out.println(frutaCitrica);
                     } else {
