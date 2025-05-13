@@ -75,4 +75,13 @@ public class Recursos {
         }
         return frutas.add(fruta);
     }
+
+    public boolean agregarFrutaCitrica(FrutaCitrica fruta) {
+        for (Fruta frutal : frutasCitric) {
+            if (fruta.getNombre().equals(frutal.getNombre())) {
+                return false;
+            }
+        }
+        return frutasCitric.add(fruta);
+    }
 }
