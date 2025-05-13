@@ -66,4 +66,13 @@ public class Recursos {
         frutasCitric.add(new FrutaCitrica("Naranja", 50, 70, 3.8));
 
     }
+
+    public boolean agregarFruta(Fruta fruta) {
+        for (Fruta frutal : frutas) {
+            if (fruta.getNombre().equals(frutal.getNombre())) {
+                return false;
+            }
+        }
+        return frutas.add(fruta);
+    }
 }
