@@ -43,11 +43,19 @@ public class Main {
                         System.out.print("Ingrese el ph: ");
                         double ph = sc.nextDouble();
                         frutaCitrica = new FrutaCitrica(nombre, peso, calPorGramo, ph);
-                        r.agregarFrutaCitrica(frutaCitrica);
+                        if (r.agregarFrutaCitrica(frutaCitrica)) {
+                            System.out.println("Fruta Citrica agregada correctamente!");
+                        } else {
+                            System.out.println("Esta fruta citrica ya existe!");
+                        }
 
                     } else if (tipo == 2) { // Si es una fruta normal o ordinaria.
                         fruta = new Fruta(nombre, peso, calPorGramo);
-                        r.agregarFruta(fruta);
+                        if (r.agregarFruta(fruta)) {
+                            System.out.println("Fruta agregada correctamente!");
+                        } else {
+                            System.out.println("Esta fruta ya existe!");
+                        }
                     } else {
                         System.out.println("Tipo de fruta no válido.");
                     }
