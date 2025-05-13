@@ -14,6 +14,14 @@ public class Main {
         Recursos r = new Recursos();
         r.cargarFrutas();
 
+        int[] indiceReciente = new int[2];
+
+        // Si es 1 indica que pertence a la lista de frutas, 2 en caso de ser la lista de frutas citricas
+        indiceReciente[0] = 1;
+
+        // Es el indice del ultimo elemento de la lista
+        indiceReciente[1] = r.getFrutas().size() - 1;
+
         int opcion;
         Fruta fruta = new Fruta();
         FrutaCitrica frutaCitrica = new FrutaCitrica();
@@ -21,6 +29,7 @@ public class Main {
         do {
             imprimirMenu();
 
+            System.out.println("Seleccione una opcion: ");
             opcion = sc.nextInt();
 
             switch (opcion) {
@@ -32,7 +41,7 @@ public class Main {
                     int tipo = sc.nextInt();
 
                     System.out.print("Ingrese el nombre: ");
-                    String nombre = sc.nextLine();
+                    String nombre = sc.next();
                     System.out.print("Ingrese el peso: ");
                     double peso = sc.nextDouble();
                     System.out.print("Ingrese las caloríasxgramo: ");
@@ -45,6 +54,8 @@ public class Main {
                         frutaCitrica = new FrutaCitrica(nombre, peso, calPorGramo, ph);
                         if (r.agregarFrutaCitrica(frutaCitrica)) {
                             System.out.println("Fruta Citrica agregada correctamente!");
+                            indiceReciente[0] = 2;
+                            indiceReciente[1] = r.getFrutas().size() - 1;
                         } else {
                             System.out.println("Esta fruta citrica ya existe!");
                         }
@@ -53,6 +64,8 @@ public class Main {
                         fruta = new Fruta(nombre, peso, calPorGramo);
                         if (r.agregarFruta(fruta)) {
                             System.out.println("Fruta agregada correctamente!");
+                            indiceReciente[0] = 1;
+                            indiceReciente[1] = r.getFrutas().size() - 1;
                         } else {
                             System.out.println("Esta fruta ya existe!");
                         }
@@ -61,20 +74,35 @@ public class Main {
                     }
                     break;
                 }
-
                 case 2: {
-                    if (fruta != null) {
-                        double calorias = fruta.calcCaloriasTotal();
-                        System.out.println("Calorías totales: " + calorias);
-                    } else if (frutaCitrica != null) {
-                        double calorias = frutaCitrica.calcCaloriasTotal();
-                        System.out.println("Calorías totales: " + calorias);
-                    } else {
-                        System.out.println("Primero debes ingresar una fruta.");
-                    }
-                    break;
-                }
+                    System.out.println("Se ha seleccionado la ultima fruta o fruta citrica que ingresaste");
+                    System.out.println("1. Continuar\n 0. Salir");
 
+                    if (sc.nextInt() == 1) {
+                        Fruta ultimaFruta;
+                        switch (indiceReciente[0]) {
+                            case 1: {
+                                ultimaFruta = r.getFrutas().get(indiceReciente[1]);
+                                System.out.println("Las calorias totales de la fruta " + ultimaFruta.getNombre() +
+                                        " Son " + ultimaFruta.calcCaloriasTotal() + " cal");
+                            }
+                            break;
+                            case 2: {
+                                ultimaFruta = r.getFrutasCitric().get(indiceReciente[1]);
+                                System.out.println("Las calorias totales de la fruta " + ultimaFruta.getNombre() +
+                                        " Son " + ultimaFruta.calcCaloriasTotal() + " cal");
+                            }
+                            break;
+                            default: {
+                                System.out.println("ERROR - NO SE PUDO RECUPERAR LA ULTIMA FRUTA");
+                            }
+                            break;
+                        }
+
+                    } else {
+                        System.out.println("saliendo...");
+                    }
+                }
                 case 3: {
                     if (fruta != null) {
                         System.out.print("Nuevo nombre: ");
@@ -100,7 +128,6 @@ public class Main {
                     }
                     break;
                 }
-
                 case 4: {
                     if (fruta != null) {
                         System.out.println(fruta);
@@ -111,13 +138,12 @@ public class Main {
                     }
                     break;
                 }
+                case 5:{
+                    System.out.println("Cerrando el programa...");
+                    break;}
 
-                case 5:
-                    System.out.println("Salir");
-                    break;
-
-                default:
-                    System.out.println("Opción no válida.");
+                default:{
+                    System.out.println("Opción no válida.");}
             }
 
         } while (opcion != 5);
@@ -126,12 +152,13 @@ public class Main {
     }
 
     private static void imprimirMenu() {
-        System.out.println("Seleccione una opcion");
-        System.out.println("1.Seleccionar el tipo de fruta e ingresar sus datos. ");
-        System.out.println("2. Calcular el total de calorías aportadas");
+        System.out.println("------ MENU ------");
+        System.out.println("1. Seleccionar el tipo de fruta e ingresar sus datos. ");
+        System.out.println("2. Calcular el total de calorias aportadas");
         System.out.println("3. Modificar los datos de las frutas");
-        System.out.print("4. Mostrar la información de las frutas ");
-        System.out.print("5. Salir");
+        System.out.println("4. Mostrar la información de las frutas ");
+        System.out.println("5. Salir");
+        System.out.println("------ MENU ------");
     }
 }
 

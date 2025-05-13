@@ -6,8 +6,10 @@ public class Recursos {
 
     // Atributos
 
-    LinkedList<Fruta> frutas;
-    LinkedList<FrutaCitrica> frutasCitric;
+    private LinkedList<Fruta> frutas;
+    private LinkedList<FrutaCitrica> frutasCitric;
+
+    private int[] frutaUltima;
 
     // Constructor
 
@@ -33,6 +35,11 @@ public class Recursos {
     public void setFrutasCitric(LinkedList<FrutaCitrica> frutasCitric) {
         this.frutasCitric = frutasCitric;
     }
+
+    public int[] getFrutaUltima() {
+        return frutaUltima;
+    }
+
 
     // Metodos propios
 
