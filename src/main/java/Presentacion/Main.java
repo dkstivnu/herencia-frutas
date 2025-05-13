@@ -30,7 +30,7 @@ public class Main {
             imprimirMenu();
 
             System.out.println("Seleccione una opcion: ");
-            opcion = sc.nextInt();
+            opcion = getAnInt(sc);
 
             switch (opcion) {
                 case 1: {
@@ -38,24 +38,24 @@ public class Main {
                     System.out.println("1. Cítrica");
                     System.out.println("2. Normal");
 
-                    int tipo = sc.nextInt();
+                    int tipo = getAnInt(sc);
 
                     System.out.print("Ingrese el nombre: ");
                     String nombre = sc.next();
                     System.out.print("Ingrese el peso: ");
-                    double peso = sc.nextDouble();
-                    System.out.print("Ingrese las caloríasxgramo: ");
-                    double calPorGramo = sc.nextDouble();
+                    double peso = getADouble(sc);
+                    System.out.print("Ingrese las calorías por gramo: ");
+                    double calPorGramo = getADouble(sc);
 
 
                     if (tipo == 1) { // Si es una fruta citrica.
                         System.out.print("Ingrese el ph: ");
-                        double ph = sc.nextDouble();
+                        double ph = getADouble(sc);
                         frutaCitrica = new FrutaCitrica(nombre, peso, calPorGramo, ph);
                         if (r.agregarFrutaCitrica(frutaCitrica)) {
                             System.out.println("Fruta Citrica agregada correctamente!");
                             indiceReciente[0] = 2;
-                            indiceReciente[1] = r.getFrutas().size() - 1;
+                            indiceReciente[1] = r.getFrutasCitric().size() - 1;
                         } else {
                             System.out.println("Esta fruta citrica ya existe!");
                         }
@@ -78,7 +78,7 @@ public class Main {
                     System.out.println("Se ha seleccionado la ultima fruta o fruta citrica que ingresaste");
                     System.out.println("1. Continuar\n 0. Salir");
 
-                    if (sc.nextInt() == 1) {
+                    if (getAnInt(sc) == 1) {
                         Fruta ultimaFruta;
                         switch (indiceReciente[0]) {
                             case 1: {
@@ -100,48 +100,57 @@ public class Main {
                         }
 
                     } else {
-                        System.out.println("saliendo...");
+                        System.out.println("Saliendo...");
                     }
+                    break;
                 }
                 case 3: {
-                    if (fruta != null) {
+                    System.out.println("Selecciona el tipo de fruta que quieres modificar: ");
+                    System.out.println("1. Fruta Ordinaria");
+                    System.out.println("2. Fruta Citrica");
+                    int tipo = getAnInt(sc);
+                    System.out.println("Selecciona el indicador (indice) de la fruta: ");
+                    int indice = getAnInt(sc);
+
+
+
+                    if (tipo == 1 && indice < r.getFrutas().size()) {
                         System.out.print("Nuevo nombre: ");
-                        fruta.setNombre(sc.nextLine());
+                        r.getFrutas().get(indice).setNombre(sc.next());
                         System.out.print("Nuevo peso: ");
-                        fruta.setPeso(sc.nextDouble());
+                        r.getFrutas().get(indice).setPeso(getADouble(sc));
                         System.out.print("Nuevas calorías por gramo: ");
-                        fruta.setCaloriasPorGramo(sc.nextDouble());
-                        sc.nextLine();
-                    } else if (frutaCitrica != null) {
+                        r.getFrutas().get(indice).setCaloriasPorGramo(getADouble(sc));
+
+                    }else if (tipo == 2 && indice < r.getFrutasCitric().size()) {
                         System.out.print("Nuevo nombre: ");
-                        frutaCitrica.setNombre(sc.nextLine());
+                        r.getFrutasCitric().get(indice).setNombre(sc.next());
                         System.out.print("Nuevo peso: ");
-                        frutaCitrica.setPeso(sc.nextDouble());
+                        r.getFrutasCitric().get(indice).setPeso(getADouble(sc));
                         System.out.print("Nuevas calorías por gramo: ");
-                        frutaCitrica.setCaloriasPorGramo(sc.nextDouble());
+                        r.getFrutasCitric().get(indice).setCaloriasPorGramo(getADouble(sc));
                         System.out.print("Nuevo pH: ");
-                        double nuevoPh = sc.nextDouble();
-                        frutaCitrica.setPh(sc.nextDouble());//no se porque el set no funciona...
-                        sc.nextLine();
+                        r.getFrutasCitric().get(indice).setPh(getADouble(sc));
+
                     } else {
-                        System.out.println("No hay fruta para modificar.");
+                        System.out.println("tipo e indice de fruta no valido, intente nuevamente!");
                     }
                     break;
                 }
                 case 4: {
-                    if (fruta != null) {
-                        System.out.println(fruta);
-                    } else if (frutaCitrica != null) {
-                        System.out.println(frutaCitrica);
-                    } else {
-                        System.out.println("No hay fruta registrada.");
+                    System.out.println("--- LISTA DE FRUTAS ---");
+                    for (Fruta frutal : r.getFrutas()) {
+                        System.out.println(frutal);
+                    }
+                    System.out.println("--- LISTA DE FRUTAS CITRICAS---");
+                    for (Fruta frutal : r.getFrutasCitric()) {
+                        System.out.println(frutal);
                     }
                     break;
                 }
                 case 5:{
                     System.out.println("Cerrando el programa...");
                     break;}
-
                 default:{
                     System.out.println("Opción no válida.");}
             }
@@ -149,6 +158,34 @@ public class Main {
         } while (opcion != 5);
 
         sc.close();
+    }
+
+    private static double getADouble(Scanner sc) {
+        double numero;
+        boolean valido = true;
+        do{
+            numero = sc.nextInt();
+            if (numero < 0){
+                System.out.println(" El numero no puede ser negativo o igual a cero");
+                valido = false;
+            }else valido = true;
+
+        }while (!valido);
+        return numero;
+    }
+
+    private static int getAnInt(Scanner sc) {
+        int numero;
+        boolean valido = true;
+         do{
+             numero = sc.nextInt();
+             if (numero < 0){
+                 System.out.println(" El numero no puede ser negativo o igual a cero");
+                 valido = false;
+             }else valido = true;
+
+         }while (!valido);
+         return numero;
     }
 
     private static void imprimirMenu() {
